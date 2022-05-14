@@ -44,15 +44,7 @@ void DrawSticks() {
         Sticks[i].DrawStick();
 }
 
-
-int main(void) {
-    int i = 0;
-    int j = 0;
-    InitWindow(WIDTH, HEIGHT, "Sorting Visualizer");
-
-    InitSticks();
-    SetTargetFPS(60);
-    
+void BubbleSort(int i, int j) {
     while (!WindowShouldClose()) {
         
         for(int k = 0; k < SPEED; k++) {
@@ -74,18 +66,63 @@ int main(void) {
                 j = 0;
                 i++;
             }
-        }
+          }
         }
         BeginDrawing();
         
         ClearBackground(BLACK);
         
-        for(int i = 0; i < NUMBER_OF_STICKS; i++)
-            Sticks[i].DrawStick();
+        DrawSticks();
             
         EndDrawing();
     }
+}
 
+void SelectionSort(int i, int j) {
+    int min_id = 0;
+    
+    while(!WindowShouldClose()) {
+        
+        if (i < NUMBER_OF_STICKS - 1) {
+            
+            Sticks[min_id].color = WHITE;
+            Sticks[i - 1].color = GREEN;
+            
+            min_id = i;
+            for (int j = i + 1; j < NUMBER_OF_STICKS; j++) {
+                if (Sticks[j].height < Sticks[min_id].height) {
+                    min_id = j;
+                }
+                
+            }
+            Sticks[min_id].color = BLUE;
+            std::swap(Sticks[i].height, Sticks[min_id].height);
+            i++;
+
+        }
+        Sticks[i].color = GREEN;
+            
+        BeginDrawing();
+        
+        ClearBackground(BLACK);
+        
+        DrawSticks();
+        
+        EndDrawing();
+    }
+    
+}
+int main(void) {
+    int i = 0;
+    int j = 0;
+    InitWindow(WIDTH, HEIGHT, "Sorting Visualizer");
+
+    InitSticks();
+    
+    SetTargetFPS(60);
+    
+   // BubbleSort(i, j);
+    SelectionSort(i, j);
     CloseWindow();
 
     return 0;
