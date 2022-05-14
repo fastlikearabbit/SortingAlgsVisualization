@@ -8,9 +8,9 @@
 
 #define STICK_WIDTH 3.0f
 #define STICK_PADDING 20
-
 #define NUMBER_OF_STICKS WIDTH / (int)STICK_WIDTH
 
+#define SPEED 100
 
 struct Stick {
     float x, y;
@@ -43,19 +43,6 @@ void DrawSticks() {
     for(int i = 0; i < NUMBER_OF_STICKS; i++)
         Sticks[i].DrawStick();
 }
-void BubbleSort() {
-    for(int i = 0; i < NUMBER_OF_STICKS; i++) {
-        for(int j = 0; j < NUMBER_OF_STICKS - i - 1; j++) {
-            if (Sticks[j].height > Sticks[j + 1].height) {
-                Sticks[j].color = BLUE;
-                std::swap(Sticks[j].height, Sticks[j + 1].height);
-            }
-
-        }
-        Sticks[NUMBER_OF_STICKS - i - 1].color = GREEN;
-
-    }
-}
 
 
 int main(void) {
@@ -68,16 +55,21 @@ int main(void) {
     
     while (!WindowShouldClose()) {
         
-        for(int k = 0; k < 15; k++) {
+        for(int k = 0; k < SPEED; k++) {
+            
         if (i < NUMBER_OF_STICKS) {
+            Sticks[j].color = BLUE;
+            
             if (Sticks[j].height > Sticks[j + 1].height) {
-                    std::swap(Sticks[j].height, Sticks[j + 1].height);
-                    //Sticks[j + 1].color = BLUE;
-                   // Sticks[j].color = WHITE;
-
-                }
+                Sticks[j].color = WHITE;
+                Sticks[j + 1].color = BLUE;
+                std::swap(Sticks[j].height, Sticks[j + 1].height);
+                
+            } else {
+                Sticks[j].color = WHITE;
+            }
             j++;
-            if (j >= NUMBER_OF_STICKS) {
+            if (j >= NUMBER_OF_STICKS - i - 1) {
                 Sticks[NUMBER_OF_STICKS - i - 1].color = GREEN;
                 j = 0;
                 i++;
