@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A603A1128300DF800E76AB5 /* sorting_algs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A603A0F28300DF800E76AB5 /* sorting_algs.cpp */; };
 		7A819CA7282FA0A80073CC5F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A819CA6282FA0A80073CC5F /* main.cpp */; };
 		7A819CAF282FA0C10073CC5F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A819CAE282FA0C10073CC5F /* Cocoa.framework */; };
 		7A819CB1282FA0C70073CC5F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A819CB0282FA0C70073CC5F /* IOKit.framework */; };
@@ -27,6 +28,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7A603A0F28300DF800E76AB5 /* sorting_algs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sorting_algs.cpp; sourceTree = "<group>"; };
+		7A603A1028300DF800E76AB5 /* sorting_algs.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sorting_algs.hpp; sourceTree = "<group>"; };
 		7A819CA3282FA0A80073CC5F /* SORTING_VISUALIZER */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SORTING_VISUALIZER; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A819CA6282FA0A80073CC5F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		7A819CAE282FA0C10073CC5F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -71,6 +74,8 @@
 			isa = PBXGroup;
 			children = (
 				7A819CA6282FA0A80073CC5F /* main.cpp */,
+				7A603A0F28300DF800E76AB5 /* sorting_algs.cpp */,
+				7A603A1028300DF800E76AB5 /* sorting_algs.hpp */,
 			);
 			path = SORTING_VISUALIZER;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A819CA7282FA0A80073CC5F /* main.cpp in Sources */,
+				7A603A1128300DF800E76AB5 /* sorting_algs.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

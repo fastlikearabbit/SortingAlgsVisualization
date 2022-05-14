@@ -10,7 +10,7 @@
 #define STICK_PADDING 20
 #define NUMBER_OF_STICKS WIDTH / (int)STICK_WIDTH
 
-#define SPEED 100
+#define SPEED 50
 
 struct Stick {
     float x, y;
@@ -18,7 +18,7 @@ struct Stick {
     Color color;
     
     Rectangle GetStick() {
-        return Rectangle { x, y, width, height };
+        return Rectangle { x, y + HEIGHT - height, width, height };
     }
     
     void DrawStick() {
