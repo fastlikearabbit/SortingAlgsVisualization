@@ -1,6 +1,7 @@
 #include <iostream>
 #include "raylib.h"
 #include <time.h>
+#include <stack>
 
 
 #define HEIGHT 800
@@ -163,28 +164,29 @@ void quickSortIterative() {
     
     int start = 0;
     int end = NUMBER_OF_STICKS - 1;
-    int stack[end - start + 1];
-    int top = 0;
-    stack[top] = start;
-    stack[++top] = end;
+    std::stack<int> s;
+    s.push(start);
+    s.push(end);
     
     int i = 0;
     
     while(!WindowShouldClose()) {
-        if (top >= 0) {
-            end = stack[top--];
-            start = stack[top--];
+        if (!s.empty()) {
+            end = s.top();
+            s.pop();
+            start = s.top();
+            s.pop();
             
-            int pivot = partition(start, end);
+            int pivot_idx = partition(start, end);
             
-            if (pivot + 1 < end) {
-                stack[++top] = pivot + 1;
-                stack[++top] = end;
+            if (pivot_idx + 1 < end) {
+                s.push(pivot_idx + 1);
+                s.push(end);
             }
             
-            if (pivot - 1 > start) {
-                stack[++top] = start;
-                stack[++top] = pivot - 1;
+            if (pivot_idx - 1 > start) {
+                s.push(start);
+                s.push(pivot_idx - 1);
                 
             }
         
