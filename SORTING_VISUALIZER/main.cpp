@@ -122,7 +122,7 @@ int partition(int start, int end) {
     
     
     for (int j = start; j < end; j++) {
-        if (pivot > Sticks[j].height) {
+        if (pivot >= Sticks[j].height) {
             pivot_idx++;
             std::swap(Sticks[j].height, Sticks[pivot_idx].height);
         }
@@ -158,6 +158,46 @@ void quickSortVisualizeResult() {
         
     }
 }
+
+void quickSortIterative() {
+    
+    int start = 0;
+    int end = NUMBER_OF_STICKS - 1;
+    int stack[end - start + 1];
+    int top = 0;
+    stack[top] = start;
+    stack[++top] = end;
+    
+    while(!WindowShouldClose()) {
+        if (top >= 0) {
+            end = stack[top--];
+            start = stack[top--];
+            
+            int pivot = partition(start, end);
+            
+            if (pivot - 1 > start) {
+                stack[++top] = start;
+                stack[++top] = pivot - 1;
+                
+            }
+            
+            if (pivot + 1 < end) {
+                stack[++top] = pivot + 1;
+                stack[++top] = end;
+            }
+            
+        }
+        
+        BeginDrawing();
+        
+        ClearBackground(BLACK);
+        DrawSticks();
+        
+        EndDrawing();
+    }
+    
+}
+
 int main(void) {
     InitWindow(WIDTH, HEIGHT, "Sorting Visualizer");
 
@@ -165,7 +205,8 @@ int main(void) {
     
     SetTargetFPS(60);
     
-    quickSortVisualizeResult();
+    quickSortIterative();
+    //quickSortVisualizeResult();
     //BubbleSort(0, 0);
     //SelectionSort(0, 0);
     CloseWindow();
