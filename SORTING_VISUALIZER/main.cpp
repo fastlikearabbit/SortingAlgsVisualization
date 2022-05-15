@@ -168,6 +168,8 @@ void quickSortIterative() {
     stack[top] = start;
     stack[++top] = end;
     
+    int i = 0;
+    
     while(!WindowShouldClose()) {
         if (top >= 0) {
             end = stack[top--];
@@ -175,17 +177,20 @@ void quickSortIterative() {
             
             int pivot = partition(start, end);
             
-            if (pivot - 1 > start) {
-                stack[++top] = start;
-                stack[++top] = pivot - 1;
-                
-            }
-            
             if (pivot + 1 < end) {
                 stack[++top] = pivot + 1;
                 stack[++top] = end;
             }
             
+            if (pivot - 1 > start) {
+                stack[++top] = start;
+                stack[++top] = pivot - 1;
+                
+            }
+        
+            
+        } else {
+            Sticks[i++].color = GREEN;
         }
         
         BeginDrawing();
