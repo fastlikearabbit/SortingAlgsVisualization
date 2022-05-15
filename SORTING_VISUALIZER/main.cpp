@@ -34,7 +34,7 @@ void InitSticks() {
     for(int i = 0; i < NUMBER_OF_STICKS; i++) {
         int h = rand() % HEIGHT + STICK_PADDING;
         Sticks[i] = { .x = i * STICK_WIDTH, .y = 0, \
-                      .width = STICK_WIDTH, .height = (float)h, .color = WHITE};
+                      .width = STICK_WIDTH, .height = (float)h, .color = WHITE };
     }
 }
 
@@ -101,6 +101,7 @@ void SelectionSort(int i, int j) {
 
         }
         Sticks[i].color = GREEN;
+        Sticks[i - 1].color = GREEN;
             
         BeginDrawing();
         
@@ -112,17 +113,61 @@ void SelectionSort(int i, int j) {
     }
     
 }
+
+int partition(int start, int end) {
+    
+    int pivot_idx = start - 1;
+    
+    int pivot = Sticks[end].height;
+    
+    
+    for (int j = start; j < end; j++) {
+        if (pivot > Sticks[j].height) {
+            pivot_idx++;
+            std::swap(Sticks[j].height, Sticks[pivot_idx].height);
+        }
+    }
+    
+    std::swap(Sticks[pivot_idx + 1].height, Sticks[end].height);
+        
+    
+    return pivot_idx + 1;
+}
+
+void quickSort(int start, int end) {
+    
+    if (start >= end) return;
+    
+    int pivot = partition(start, end);
+    
+    quickSort(start, pivot - 1);
+    quickSort(pivot + 1, end);
+}
+
+void quickSortVisualizeResult() {
+    while(!WindowShouldClose()) {
+        
+        BeginDrawing();
+        
+        ClearBackground(BLACK);
+        
+        quickSort(0, NUMBER_OF_STICKS - 1);
+        DrawSticks();
+        
+        EndDrawing();
+        
+    }
+}
 int main(void) {
-    int i = 0;
-    int j = 0;
     InitWindow(WIDTH, HEIGHT, "Sorting Visualizer");
 
     InitSticks();
     
     SetTargetFPS(60);
     
-   // BubbleSort(i, j);
-    SelectionSort(i, j);
+    quickSortVisualizeResult();
+    //BubbleSort(0, 0);
+    //SelectionSort(0, 0);
     CloseWindow();
 
     return 0;
