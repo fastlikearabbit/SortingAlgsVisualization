@@ -7,7 +7,7 @@
 #define HEIGHT 800
 #define WIDTH  1200
 
-#define STICK_WIDTH 3.0f
+#define STICK_WIDTH 5.0f
 #define STICK_PADDING 20
 #define NUMBER_OF_STICKS WIDTH / (int)STICK_WIDTH
 
@@ -35,7 +35,7 @@ void InitSticks() {
     for(int i = 0; i < NUMBER_OF_STICKS; i++) {
         int h = rand() % HEIGHT + STICK_PADDING;
         Sticks[i] = { .x = i * STICK_WIDTH, .y = 0, \
-                      .width = STICK_WIDTH, .height = (float)h, .color = WHITE };
+                      .width = STICK_WIDTH, .height = (float)h, .color = SKYBLUE };
     }
 }
 
@@ -54,16 +54,16 @@ void BubbleSort(int i, int j) {
             Sticks[j].color = BLUE;
             
             if (Sticks[j].height > Sticks[j + 1].height) {
-                Sticks[j].color = WHITE;
+                Sticks[j].color = SKYBLUE;
                 Sticks[j + 1].color = BLUE;
                 std::swap(Sticks[j].height, Sticks[j + 1].height);
                 
             } else {
-                Sticks[j].color = WHITE;
+                Sticks[j].color = SKYBLUE;
             }
             j++;
             if (j >= NUMBER_OF_STICKS - i - 1) {
-                Sticks[NUMBER_OF_STICKS - i - 1].color = GREEN;
+               Sticks[NUMBER_OF_STICKS - i - 1].color = BLUE;
                 j = 0;
                 i++;
             }
@@ -283,10 +283,9 @@ int main(void) {
     
     SetTargetFPS(60);
     
-    mergeSortIterative();
+    //mergeSortIterative();
     //quickSortIterative();
-    //quickSortVisualizeResult();
-    //BubbleSort(0, 0);
+    BubbleSort(0, 0);
     //SelectionSort(0, 0);
     CloseWindow();
 
