@@ -11,7 +11,7 @@
 #define STICK_PADDING 20
 #define NUMBER_OF_STICKS WIDTH / (int)STICK_WIDTH
 
-#define SPEED 50
+#define SPEED 100
 
 struct Stick {
     float x, y;
@@ -205,6 +205,77 @@ void quickSortIterative() {
     
 }
 
+void merge(int left, int middle, int right) {
+    int leftSize = middle - left + 1;
+    float A[leftSize];
+    
+    int rightSize = right - middle;
+    float B[rightSize];
+    
+    for (int i = left; i <= middle; i++)
+        A[i - left] = Sticks[i].height;
+    
+    for (int i = middle + 1; i <= right; i++)
+        B[i - middle - 1] = Sticks[i].height;
+    
+    int i = 0, j = 0;
+    int k = left;
+    
+    while (i < leftSize && j < rightSize) {
+        if (A[i] < B[j]) {
+            Sticks[k++].height = A[i++];
+        } else {
+            Sticks[k++].height = B[j++];
+        }
+    }
+    
+    while (i < leftSize) {
+        Sticks[k++].height = A[i++];
+    }
+    
+    while (j < rightSize) {
+        Sticks[k++].height = B[j++];
+    }
+    
+}
+
+
+void mergeSortIterative() {
+    int i = 1, j = 0;
+    
+    while(!WindowShouldClose()) {
+        
+        if (i <= NUMBER_OF_STICKS) {
+            int l = j;
+            int m = j + i - 1;
+            int r;
+            
+            if (j + 2 * i - 1 < NUMBER_OF_STICKS - 1) {
+                r = j + 2 * i - 1;
+            } else {
+                r = NUMBER_OF_STICKS - 1;
+            }
+            merge(l, m, r);
+            
+            j += 2 * i;
+            
+            if (j >= NUMBER_OF_STICKS - i + 1) {
+                j = 0;
+                i *= 2;
+            }
+
+        }
+                
+        BeginDrawing();
+        
+        ClearBackground(BLACK);
+        
+        DrawSticks();
+        
+        EndDrawing();
+    }
+}
+
 int main(void) {
     InitWindow(WIDTH, HEIGHT, "Sorting Visualizer");
 
@@ -212,7 +283,8 @@ int main(void) {
     
     SetTargetFPS(60);
     
-    quickSortIterative();
+    mergeSortIterative();
+    //quickSortIterative();
     //quickSortVisualizeResult();
     //BubbleSort(0, 0);
     //SelectionSort(0, 0);
